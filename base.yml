@@ -1,0 +1,8 @@
+- name: Base playbook
+  hosts: localhost
+  tasks:
+    - name: Ping
+      ping:
+    - name: Print system information
+      debug:
+        msg: "{{ ansible_nodename }} => {{ ansible_os_family }} / {{ ansible_machine }}"
