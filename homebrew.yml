@@ -1,0 +1,17 @@
+- name: Homebrew setup
+  hosts: localhost
+  tasks:
+  community.general.homebrew:
+    update_homebrew: yes
+
+- name: Homebrew package installation
+  community.general.homebrew:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - python@3.10
+    - python@3.9
+    - pycharm
+    - openjdk@11
+    - 1password
+    - hashicorp/tap/vault
