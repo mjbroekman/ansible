@@ -32,8 +32,29 @@
   community.general.homebrew:
     update_homebrew: true
 
+- name: "Ensure we have tapped all the needed brew taps"
+  community.general.homebrew_tap:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ homebrew_taps }}"
+
 - name: "Ensure desired packages are installed at the latest version"
   community.general.homebrew:
     name: "{{ item }}"
     state: latest
-  loop: "{{ homebrew_pkgs }}"
+  loop: "{{ homebrew_fmls }}"
+
+- name: "Ensure casks are installed"
+  community.general.homebrew_cask:
+    name: "{{ item }}"
+    state: latest
+  loop: "{{ homebrew_casks }}"
+
+- name: "Ensure all dependencies are up to date"
+  community.general.homebrew:
+    upgrade_all: true
+
+- name: "Ensure all dependent casks are up to date"
+  community.general.homebrew_cask:
+    greedy: true
+    upgrade_all: true
