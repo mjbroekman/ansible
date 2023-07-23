@@ -1,6 +1,8 @@
 ---
 - name: Set up a system
   hosts: localhost
+  connection: local
+
   tasks:
   - name: Install necessary homebrew artifacts
     ansible.builtin.include_role:
