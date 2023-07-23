@@ -1,2 +1,5 @@
 ---
 # tasks file for my_setup
+- name: Set up Homebrew
+  ansible.builtin.include_tasks:
+    file: homebrew.yml
