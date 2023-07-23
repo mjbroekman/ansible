@@ -6,7 +6,6 @@
 
 - name: "Tasks to run when Homebrew is already installed"
   when: not home_brew.stat.exists
-  failed_when: install_output.rc != 0
   block:
     - name: "Download Homebrew installer"
       ansible.builtin.uri:
@@ -27,6 +26,7 @@
     - name: "Command output"
       ansible.builtin.debug:
         var: install_output
+      failed_when: install_output.rc != 0
 
 - name: "Update Homebrew"
   community.general.homebrew:
@@ -36,4 +36,4 @@
   community.general.homebrew:
     name: "{{ item }}"
     state: latest
-  loop: homebrew_pkgs
+  loop: "{{ homebrew_pkgs }}"
