@@ -1,0 +1,20 @@
+---
+collections:
+- community.general
+- community.aws
+- community.azure
+- community.vmware
+- community.docker
+- community.grafana
+- community.google
+- community.hashi_vault
+- awx.awx
+- kubernetes.core
+
+##########################################
+# If community.??? doesn't work, use the #
+# appropriate proprietary collection     #
+##########################################
+# - azure.azcollection
+# - amazon.aws
+# - google.cloud
