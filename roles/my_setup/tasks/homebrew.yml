@@ -1,34 +1,39 @@
 ---
-- name: Update Homebrew
-  community.general.homebrew:
-    update_homebrew: yes
+- name: "Check for Homebrew"
+  ansible.builtin.stat:
+    path: "/opt/homebrew/bin/brew"
+  register: home_brew
 
-- name: Homebrew package installation
+- name: "Tasks to run when Homebrew is already installed"
+  when: not home_brew.stat.exists
+  failed_when: install_output.rc != 0
+  block:
+    - name: "Download Homebrew installer"
+      ansible.builtin.uri:
+        url: https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+        validate_certs: false
+        dest: /tmp/homebrew_install.sh
+        mode: a+x
+
+    - name: "Run Homebrew installer"
+      ansible.builtin.command:
+        cmd: bash -c /tmp/homebrew_install.sh
+      environment:
+        NONINTERACTIVE: "1"
+      register: install_output
+      changed_when: install_output.rc != 0
+      failed_when: false
+
+    - name: "Command output"
+      ansible.builtin.debug:
+        var: install_output
+
+- name: "Update Homebrew"
+  community.general.homebrew:
+    update_homebrew: true
+
+- name: "Ensure desired packages are installed at the latest version"
   community.general.homebrew:
     name: "{{ item }}"
     state: latest
-  loop:
-    - python@3.11
-    - python@3.10
-    - python@3.9
-    - python-tk@3.11
-    - python-tk@3.10
-    - python-tk@3.9
-    - pyyaml
-    - python-tabulate
-    - qt
-    - pycharm
-    - openjdk@11
-    - openjdk@17
-    - openssl@3
-    - openssl@1.1
-    - 1password
-    - hashicorp/tap/vault
-    - ansible@8
-    - ansible-lint
-    - ruby
-    - wine-stable
-    - exiftool
-    - bzip2
-    - curl
-    
+  loop: homebrew_pkgs
