@@ -1,6 +1,12 @@
 ---
 # vars file for my_setup
-homebrew_pkgs:
+
+# Taps
+homebrew_taps:
+  - hashicorp/tap
+
+# Regular formulae
+homebrew_fmls:
   - python@3.9
   - python-tk@3.9
   - python@3.10
@@ -10,18 +16,30 @@ homebrew_pkgs:
   - pyyaml
   - python-tabulate
   - qt
-  - pycharm
   - black
   - openjdk@11
   - openjdk@17
   - openssl@3
   - openssl@1.1
-  - 1password
-  - hashicorp/tap/vault
   - ansible@8
   - ansible-lint
   - ruby
-  - wine-stable
   - exiftool
   - bzip2
   - curl
+  - node
+  - awscli
+  - azure-cli
+  - cmake
+  - libnghttp2
+  - libpthread-stubs
+  - nghttp2
+  - ssh-copy-id
+  - hashicorp/tap/vault
+  - ca-certificates
+  - terraform
+
+# Casks
+homebrew_casks:
+  - pycharm
+  - wine-stable
