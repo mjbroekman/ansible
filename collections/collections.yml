@@ -8,6 +8,7 @@ collections:
 - community.grafana
 - community.google
 - community.hashi_vault
+- community.postgresql
 - awx.awx
 - kubernetes.core
 
