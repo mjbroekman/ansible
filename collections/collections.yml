@@ -1,14 +1,15 @@
 ---
 collections:
+- azure.azcollection
 - community.general
 - community.aws
-- community.azure
 - community.vmware
 - community.docker
 - community.grafana
 - community.google
 - community.hashi_vault
 - community.postgresql
+- community.rabbitmq
 - awx.awx
 - kubernetes.core
 
@@ -16,6 +17,5 @@ collections:
 # If community.??? doesn't work, use the #
 # appropriate proprietary collection     #
 ##########################################
-# - azure.azcollection
 # - amazon.aws
 # - google.cloud
