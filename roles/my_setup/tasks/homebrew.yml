@@ -1,6 +1,5 @@
-- name: Homebrew setup
-  hosts: localhost
-  tasks:
+---
+- name: Update Homebrew
   community.general.homebrew:
     update_homebrew: yes
 

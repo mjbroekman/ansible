@@ -1,0 +1,7 @@
+---
+- name: Set up a system
+  hosts: localhost
+  tasks:
+  - name: Install necessary homebrew artifacts
+    ansible.builtin.include_role:
+      name: my_setup
