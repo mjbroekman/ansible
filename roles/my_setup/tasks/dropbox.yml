@@ -1,0 +1,24 @@
+---
+- name: "Ensure Dropbox Cloudstorage path exists"
+  ansible.builtin.stat:
+    path: "/Users/mbroekman/Library/CloudStorage/Dropbox"
+  register: db_path
+
+- name: "Ensure Dropbox Shortcut exists"
+  ansible.builtin.stat:
+    path: "/Users/mbroekman/Dropbox"
+  register: db_symlink
+
+- name: "Check that Dropbox.app is present"
+  ansible.builtin.stat:
+    path: "/Applications/Dropbox.app"
+  register: dbapp_path
+
+- name: "Install app if not present"
+  when:
+    - not dbapp_path.stat.exists
+    - not db_path.stat.exists
+  block:
+    - name: "Retrieve Dropbox Installer"
+    
+#  https://www.dropbox.com/download?plat=mac&full=1
